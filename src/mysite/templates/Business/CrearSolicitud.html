@@ -1,0 +1,108 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script language="JavaScript" type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/scriptGPI.js' %}"></script>
+{% include "Business/CSS/dashboard.html" %}
+{% include "Business/CSS/responsiveForm.html" %}
+</head>
+<body>
+
+<div class="sidenav">
+  <button class="dropdown-btn">Obras
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="/Obras/Crear">Crear Obras</a>
+    <a href="/Obras/Ver">Ver Obras</a>
+  </div>
+  <button class="dropdown-btn">Solicitudes
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="/Solicitudes/Crear">Crear Solicitudes</a>
+  </div>
+  <a href="/Logout">Logout</a>
+</div>
+
+<div class="main">
+  <p  ">Crear obra</p>
+  <div class="container">
+    <form action="" method="post" accept-charset="utf-8">{% csrf_token %}
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">obra</label>
+        </div>
+        <div class="col-75">
+          {{ form.obra }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">bodeguero</label>
+        </div>
+        <div class="col-75">
+          {{ form.bodeguero }}
+        </div>
+      </div>
+
+      <h4>MATERIALES</h4>
+      <br>
+        <button class="add_field_button" value='{{form.material}} {{ form.cantidad }} {{form.unidad}} {{form.descripcion}}'>+</button>
+        <div class="row">
+          <div class="col-25">
+            <label for="fname">material</label>
+          </div>
+          <div class="col-75">
+            {{form.material}} {{ form.cantidad }} {{form.unidad}} {{form.descripcion}}<a style="color:transparent;">X</a>
+          </div>
+        </div>
+        <div class="input_fields_wrap"></div>
+
+
+
+
+
+
+
+
+
+      <div class="row">
+        <input type="submit" value="Crear Solicitud" />
+      </div>
+      <div class="row">
+      <input type="hidden" name="next" value="/" />
+      </div>
+      {% if form.errors %}
+        <p style="color: red;">Lo sentimos, intentelo denuevo</p>
+      {% endif %}
+    </form>
+  </div>
+
+
+
+</div>
+
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+version: '2'
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: nginxGPI
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/src
+      - ./config/nginx:/etc/nginx/conf.d
+      - /static:/static
+    depends_on:
+      - web
+
+  web:
+    build: .
+    container_name: webGPI
+    command: bash -c "python manage.py makemigrations &&
+                      python manage.py migrate &&
+                      python manage.py collectstatic --noinput &&
+                      python manage.py seedsuperuser --username gpi --password gpi123456 --noinput --email 'gpi@gmail.com' &&
+                      gunicorn mysite.wsgi -b 0.0.0.0:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./src:/src
+      - /static:/static
+    expose:
+      - "8000"
+
+  db:
+      image: postgres:9.5
+      container_name: postgresGPI
+      ports:
+        - "5432:5432"
+      volumes:
+        - ./postgres_data:/var/lib/postgresql/data/
+      restart: always
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=1234
+        - POSTGRES_DB=postgres
+volumes:
+  postgres_data:

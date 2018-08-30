@@ -1,0 +1,72 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% include "Bodeguero/CSS/dashboard.html" %}
+{% include "Bodeguero/CSS/customers.html" %}
+</head>
+<body>
+
+<div class="sidenav">
+  <button class="dropdown-btn">Solicitudes
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="/Solicitudes/Buzon">Buzón</a>
+  </div>
+  <a href="/Logout">Logout</a>
+</div>
+
+<div class="main">
+  <p  ">Buzón {{user.username}}</p>
+  {% if solicitudes%}
+  <table id="customers">
+          <tr>
+            <th>Fecha</th>
+            <th>Obra</th>
+            <th>Responsable</th>
+            <th>Email</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+          {% for solicitud in solicitudes %}
+          {% if solicitud.bodeguero.user.username == user.username %}
+          <tr>
+            <td>{{solicitud.fecha}}</td>
+            <td>{{solicitud.obra.nombre}}</td>
+            <td>{{solicitud.obra.nombre_responsable}}</td>
+            <td>{{solicitud.obra.email}}</td>
+            <td>{{solicitud.estado}}</td>
+            <td><a href="{% url 'detallesSolicitud' solicitud.pk %}">ver</a></td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+  </table>
+  {% endif %}
+
+
+
+
+</div>
+
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

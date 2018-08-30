@@ -1,0 +1,72 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% include "Business/CSS/dashboard.html" %}
+{% include "Business/CSS/customers.html" %}
+</head>
+<body>
+
+<div class="sidenav">
+  <button class="dropdown-btn">Obras
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="/Obras/Crear">Crear Obras</a>
+    <a href="/Obras/Ver">Ver Obras</a>
+  </div>
+  <button class="dropdown-btn">Solicitudes
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="/Solicitudes/Crear">Crear Solicitudes</a>
+  </div>
+  <a href="/Logout">Logout</a>
+</div>
+
+<div class="main">
+  <p  ">Ver obras</p>
+  {% if obras %}
+    <table id="customers">
+            <tr>
+              <th>nombre de la obra</th>
+              <th>ubicación</th>
+              <th>nombre del responsable</th>
+              <th>email</th>
+              <th></th>
+
+            </tr>
+            {% for obra in obras %}
+            <tr>
+              <td>{{obra.nombre}}</td>
+              <td>{{obra.ubicacion}}</td>
+              <td>{{obra.nombre_responsable}}</td>
+              <td>{{obra.email}}</td>
+              <td>ver</td>
+              </tr>
+            {% endfor %}
+    </table>
+  {% endif %}
+</div>
+
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

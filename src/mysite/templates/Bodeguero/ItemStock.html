@@ -1,0 +1,125 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% include "Bodeguero/CSS/dashboard.html" %}
+{% include "Bodeguero/CSS/customers.html" %}
+</head>
+<body>
+
+<div class="sidenav">
+  <button class="dropdown-btn">Solicitudes
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="/Solicitudes/Buzon">Buzón</a>
+  </div>
+  <a href="/Logout">Logout</a>
+</div>
+
+<div class="main">
+  <p  ">Solicitud</p>
+  {% if item%}
+  <table id="customers">
+          <tr>
+            <th>item</th>
+            <th>cantidad</th>
+            <th>estado</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>{{item.material.nombre}}</td>
+            <td>{{item.cantidad_pedida}}</td>
+            <td>{{item.estado}}</td>
+            {% if item.estado == "encargado" %}
+            <td><a>-</a></td>
+            {% endif %}
+            {% if item.estado == "reservado" %}
+            <td><a>-</a></td>
+            {% endif %}
+            {% if item.estado == "sin asignar" %}
+            <td><a href="{% url 'solicitarCompra' item.pk %}">Solicitar compra</a></td>
+            {% endif %}
+          </tr>
+
+          <tr>
+            <td>{{item.descripcion}}</td>
+          </tr>
+
+
+  </table>
+  {% endif %}
+  <br/><br/>
+  {% if materiales%}
+    <table id="customers">
+            <tr>
+              <th>codigo</th>
+              <th>item</th>
+              <th>marca</th>
+              <th>descripción</th>
+              <th>bodega</th>
+
+              <th>stock</th>
+
+              <th>reservar/liberar</th>
+            </tr>
+            {% for material in materiales %}
+            <tr>
+
+              <td>{{material.codigo}}</td>
+              <td>{{material.material.nombre}}</td>
+              <td>{{material.marca}}</td>
+              <td>{{material.caracteristicas}}</td>
+              <td>{{material.bodega.nombre}}</td>
+
+              <td>{{material.cantidad}}</td>
+
+
+          {% if item.estado == "sin asignar" %}
+              <td><a href="{% url 'reservarItem' material.pk item.pk %}">rerservar</a></td>
+          {% endif %}
+
+              {% if item.estado == "encargado" %}
+              <td><a>-</a></td>
+              {% endif %}
+
+              {% if item.estado == "reservado" %}
+                {% if item.materialReal == material %}
+                <td><a href="{% url 'liberarItem' material.pk item.pk %}">liberar</a></td>
+                {% endif %}
+                {% if item.materialReal != material %}
+                <td><a>-</a></td>
+                {% endif %}
+              {% endif %}
+            </tr>
+            {% endfor %}
+    </table>
+  {% endif %}
+  <a href="{% url 'detallesSolicitud' item.solicitud.pk %}" class="btn">VOLVER</a>
+
+
+
+
+</div>
+
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

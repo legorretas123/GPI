@@ -1,0 +1,135 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% include "Encargado/CSS/dashboard.html" %}
+{% include "Encargado/CSS/customers.html" %}
+
+
+</head>
+<body>
+
+<div class="sidenav">
+  <button class="dropdown-btn">Encargos
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="/Encargos/Buzon">Buzón</a>
+  </div>
+  <a href="/Logout">Logout</a>
+</div>
+
+<div class="main">
+  <p>Cotizar</p>
+  {% if item %}
+        <table id="customers">
+                <tr>
+                  <th> obra</th>
+                  <th> bodeguero</th>
+                  <th> nombre</th>
+                  <th> cantidad</th>
+                  <th> estado</th>
+                </tr>
+                <tr>
+                  <td>{{item.solicitud.obra.nombre}}</td>
+                  <td>{{item.solicitud.bodeguero.user.username}}</td>
+                  <td>{{item.material.categoria}}</td>
+                  <td>{{item.cantidad_pedida}}{{item.unidad}}</td>
+                  <td>{{item.estado}}</td>
+
+                </tr>
+                <tr>
+                  <td>{{item.solicitud.obra.ubicacion}}</td>
+                  <td></td>
+                  <td>{{item.material.nombre}}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>{{item.solicitud.fecha}}</td>
+                  <td></td>
+                  <td>{{item.descripcion}}</td>
+                </tr>
+        </table>
+  {% endif %}
+  <a href="{% url 'ComprasBuzon' %}">VOLVER</a>
+  <br/><br/>
+
+  {% if proveedores %}
+      <p>Proveedores</p>
+      <table id="customers">
+              <tr>
+                <th>empresa</th>
+                <th>categoria</th>
+                <th>material</th>
+                <th>nombre</th>
+                <th>email</th>
+                <th>fono</th>
+              </tr>
+              {% for proveedor in proveedores %}
+                <tr>
+                  <td>{{proveedor.empresa}}</td>
+                  <td>{{proveedor.categoria}}</td>
+                  <td>{{proveedor.material}}</td>
+                  <td>{{proveedor.nombre}}</td>
+                  <td>{{proveedor.email}}</td>
+                  <td>{{proveedor.telefono}}</td>
+                </tr>
+              {% endfor %}
+      </table>
+  {% endif %}
+ <a href="{% url 'CotizarSendMail' item.pk %}">Cotizar con proveedores</a>
+ {% if message %}
+ Email enviado a los proveedores.
+ {% endif %}
+
+
+ {% if cotizaciones %}
+     <p>Cotizaciones</p>
+     <table id="customers">
+             <tr>
+               <th>empresa</th>
+               <th>nombre</th>
+               <th>email</th>
+               <th>precio</th>
+               <th>fecha</th>
+               <th>comentarios</th>
+             </tr>
+             {% for cotizacion in cotizaciones %}
+               <tr>
+                 <td>{{cotizacion.proveedor.empresa}}</td>
+                 <td>{{cotizacion.proveedor.nombre}}</td>
+                 <td>{{cotizacion.proveedor.email}}</td>
+                 <td>{{cotizacion.precio}} </td>
+                 <td>{{cotizacion.fecha}} </td>
+                 <td>{{cotizacion.comentarios}}</td>
+               </tr>
+             {% endfor %}
+     </table>
+ {% endif %}
+
+
+
+</div>
+
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

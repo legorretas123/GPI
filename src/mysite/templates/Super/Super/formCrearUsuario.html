@@ -1,0 +1,58 @@
+
+<section id="section-form" class="grid">
+  <div class="content-wrap">
+    <div class="form">
+
+      {% if form.errors %}
+        <p style="color: yellow;">Error.</p>
+      {% endif %}
+      <form action="" method="post" accept-charset="utf-8">{% csrf_token %}
+
+
+        <p style="color: #2ECC40;">{{ form.first_name.errors.as_text }}</p>
+        <label for="id_first_name"><b>first_name:<b></label>
+        </br>
+        <input type="text" name="first_name" value="" id="first_name">
+        </br>
+
+        <p style="color: #2ECC40;">{{ form.last_name.errors.as_text }}</p>
+        <label for="id_last_name"><b>last_name<b></label>
+        </br>
+        <input type="text" name="last_name" value="" id="last_name">
+        </br>
+
+        <p style="color: #2ECC40;">{{ form.email.errors.as_text }}</p>
+        <label for="id_email"><b>email<b></label>
+        </br>
+        <input type="text" name="email" value="" id="email">
+        </br>
+
+        <p style="color: #2ECC40;">{{ form.telefono.errors.as_text }}</p>
+        <label for="id_telefono"><b>telefono<b></label>
+        </br>
+        <input type="text" name="telefono" value="" id="telefono">
+        </br>
+
+        <p style="color: #2ECC40;">{{ form.tipo.errors.as_text }}</p>
+        <label for="tipo"><b>tipo<b></label>
+        </br>
+        {{ form.tipo }}
+
+        <br><br><br>
+        <input type="submit" value="Crear Usuario" />
+        <input type="hidden" name="next" value="/Solicitudes" />
+        </br>
+        </br>
+
+
+
+
+
+
+
+
+
+      </form>
+    </div>
+  </div>
+</section>

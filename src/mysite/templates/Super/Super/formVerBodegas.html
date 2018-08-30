@@ -1,0 +1,15 @@
+
+<section id="section-users" class="grid">
+
+  {% if bodegas %}
+      <ul>
+      {% for bodega in bodegas %}
+        <div class="content-users">
+          <p>{{bodega.nombre}}, {{bodega.ubicacion}}</p>
+
+        </div>
+      {% endfor %}
+      {% else %}
+        <p>no hay bodegas</p>
+  {% endif %}
+</section>

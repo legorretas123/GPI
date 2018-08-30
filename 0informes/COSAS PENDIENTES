@@ -1,0 +1,31 @@
+
+DEUDA TÉCNICA:
+
+1)los emails enviados al momento de crear usuario no se dirigen al email del usuario que se
+está creando. Se envían al email del superusuario administrador. Esto debe cambiar al
+llevarlo a producción.
+
+2) los emails enviados al cotizar se dirigen al email del superusuario administrador.
+Esto debe cambiar en producción para enviarlos a los proveedores.
+
+las deudas técnicas 1 y 2 son deudas escogidas de manera consciente para
+evitar el spam y los correos basura a personas desconocidas mientras se construye el software.
+A demás así hemo podido verificar la correctitud de la información que se mueve entre los módulos.
+una vez terminado el software y teniendo intenciones de llevarlo a producción se deben
+eliminar esas deudas.
+
+3) actualmente no se actualizan los valores de estado de las solicitudes ni ordenes de compra
+tras eventos que deberían generar cambios de estado. Lo anterior debe ser reparado cuanto atacantes
+pero se está priorizando en este momento la construcción del módulo de geretación de ordenes de compra.
+Posterior a eso se implementará la actualización de estados de manera correcta.
+
+4) si bien el sistema de usuarios bodegueros está seguro de atacantes externos.
+los bodegueros pueden afectar las solicitudes de otros bodegueros a través de url's
+ya que la única condición existente para editar una solicitud es ser un bodeguero.
+no el bodeguero exacto que revisa esa solicitud. Lo anterior si bien es sencillo de reparar
+no se ha hecho pues se está optando por priorizar el avance efectivo de los requisitos
+funcionales críticos para el cliente.
+
+5) Si nos ponemos más exigentes: el sistema no muestra datos en tiempo real. La única manera
+de visualizar actualizaciones es recargando la página. Sin embargo lo anterior no está dentro
+de los requisitos funcionales ni extrafuncionales planificados. Pero estamos conscientes.

@@ -1,0 +1,25 @@
+
+<section id="section-form" class="grid">
+  <div class="content-wrap">
+    <div class="form">
+      {% if form.errors %}
+        <p style="color: yellow;">Error.</p>
+      {% endif %}
+      <form action="" method="post" accept-charset="utf-8" enctype='multipart/form-data'>{% csrf_token %}
+        <p style="color: #2ECC40;">{{ form.data.errors.as_text }}</p>
+        <label for="data"><b>data<b></label>
+        </br>
+        {{ form.data }}
+
+        <p style="color: #2ECC40;">{{ form.bodega.errors.as_text }}</p>
+        <label for="id_bodega"><b>bodega<b></label>
+        </br>
+        {{ form.bodega }}
+        <br><br><br>
+        <input type="submit" value="Cargar materiales" />
+        <input type="hidden" name="next" value="/" />
+
+      </form>
+    </div>
+  </div>
+</section>

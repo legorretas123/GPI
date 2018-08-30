@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+    background: #f2f2f2;
+    font-family: "Lato", sans-serif;
+}
+
+/* Fixed sidenav, full height */
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+    color: #f1f1f1;
+}
+
+/* Main content */
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    font-size: 20px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+    background-color: green;
+    color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+    display: none;
+    background-color: #262626;
+    padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+/* Some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+/* +++++++++++++++++++++++++++++++++++++ */
+/* +++++++++  RESPONSIVE FORM  ++++++++++ */
+* {
+    box-sizing: border-box;
+}
+
+input[type=text],[type=password], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+/* +++++++++++++++++++++++++++++++++++++ */
+/* +++++++++++++++++++++++++++++++++++++ */
+</style>
+</head>
+<body>
+
+  <div class="sidenav">
+    <button class="dropdown-btn">Usuarios
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="/Usuarios/Crear">Crear usuarios</a>
+      <a href="/Usuarios/Ver">Ver usuarios</a>
+    </div>
+    <button class="dropdown-btn">Bodegas
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="/Bodegas/Crear">Crear bodegas</a>
+      <a href="/Bodegas/Ver">Ver bodegas</a>
+    </div>
+    <button class="dropdown-btn">Materiales
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="/Materiales/Cargar">Cargar materiales</a>
+      <a href="/Materiales/Ver">Ver materiales</a>
+    </div>
+    <button class="dropdown-btn">Proveedores
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="/Proveedores/Cargar">Cargar proveedores</a>
+      <a href="/Proveedores/Ver">Ver proveedores</a>
+    </div>
+    <a href="/Logout">Logout</a>
+  </div>
+
+<div class="main">
+  <p  ">Crear usuario</p>
+  <div class="container">
+    <form action="" method="post" accept-charset="utf-8">{% csrf_token %}
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">nombre</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="first_name" value="" id="last_name">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">apellido</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="last_name" value="" id="last_name">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">email</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="email" value="" id="email">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">telefono</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="telefono" value="" id="telefono">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">tipo</label>
+        </div>
+        <div class="col-75">
+          {{ form.tipo }}
+        </div>
+      </div>
+
+
+      <div class="row">
+        <input type="submit" value="Crear Usuario" />
+      </div>
+      <div class="row">
+      <input type="hidden" name="next" value="/Solicitudes" />
+      </div>
+      {% if form.errors %}
+        <p style="color: red;">Lo sentimos, intentelo denuevo</p>
+      {% endif %}
+    </form>
+  </div>
+
+
+
+
+</div>
+
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

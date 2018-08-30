@@ -1,0 +1,266 @@
+DJANGO [EN DEBIAN]
+la guía:
+* https://docs.djangoproject.com/en/2.0/topics/install/#installing-official-release
+* el libro pdf
+_____________________________________________________________________________________________________________
+_____________________________________________________________________________________________________________
+aquí dejo la lista de paquetes disponibles para debian stretch:
+https://packages.debian.org/stretch/database/
+		sudo apt-get install pgadmin3
+		{aquí tambien se debería encontrar el paquete para instalar postgres}
+		# yo ya lo tenía instalado por eso no está documentado aquí
+_____________________________________________________________________________________________________________
+_____________________________________________________________________________________________________________
+se puede trabajar en el desarrollo sin instalar un server de momento.
+aquí dejo la recomendación para cuando llegue ese momento: "Apache + mod_wsgi"
+_____________________________________________________________________________________________________________
+_____________________________________________________________________________________________________________
+es recomendable trabajar durante el desarrollo con la base de datos que se planea utilizar en producción.
+aquí aparace el link hacia un enlace conector python-postgresql
+http://initd.org/psycopg/
+.........................................
+INSTALAR PIP
+.........................................
+https://packaging.python.org/guides/installing-using-linux-tools/
+
+pip con python 3
+		sudo apt install python3-venv python3-pip
+		pip install -U pip
+		sudo pip install psycopg2
+
+luego dentro del archivo vistas.py: import psycopg2
+entonces esto puede arrojar un error.. se soluciona instalando el binary			pip install psycopg2-binary
+una vez listo lo anterior se procede a ingresar a settings.py y colocar esto donde corresponda:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+o con los valores pertinentes.
+luego se ingresa a la carpeta del proyecto y se hace esto:
+	python manage.py shell
+	>>> from django.db import connection
+	>>> cursor = connection.cursor()
+	Si no sucede nada, entonces tu base de datos está confgurada correctamente. De lo contrario revisa el mensaje de
+	error para obtener un indicio sobre qué es lo que está mal.
+OBSERVACIÓN....
+
+	SI UTILIZAMOS LA CAPA DE BASE DE DATOS DE DJANGO DEBEMOS CREAR UNA NUEVA APLICACIÓN QUE SE SUMA A NUESTRO PROYECTO:
+	python manage.py startapp users
+	https://djangobook.com/django-models/
+
+
+	python manage.py check
+
+	python manage.py makemigrations
+	python manage.py migrate
+
+ejemplo de prueba: agregando un nuevo usuario a la BD
+from users.models import User
+p1 = User(NOMBRE='hola')
+p1.save()
+list = User.objects.all()
+list
+
+//AHUMADA 93 MOVISTAR DEBO IR A VER EL PLAN DE TELEFONÍA
+continuamos leyendo el libro de DJANGO
+//5.11. Seleccionar objetos
+..........................................
+para saber más: * https://pypi.python.org/pypi/psycopg2
+								* https://docs.djangoproject.com/en/2.0/ref/databases/#postgresql-notes
+___________________________________________________________________________________________________________
+_____________________________________________________________________________________________________________
+**CREANDO UN SUPER USUARIO ADMIN**:
+python manage.py createsuperuser
+
+
+Username: gpi
+password: gpi123456
+mail: gpi.ingsoftware@gmail.com
+eliminar superusuarios:
+https://stackoverflow.com/questions/26713443/django-delete-superuser
+_______________________________________________________________________________________________________________________________________________
+**INSTALL****
+Instalando Django...
+primero que todo hay que tener instalado python.
+(usando 3.5.5)
+
+luego hay que instalar Django: https://www.djangoproject.com/download/
+entonces...
+		sudo pip install Django==2.0.2
+
+{ LISTO! YA TENEMOS INSTALADO [ PYTHON 2.0.2 + PYTHON 3.5.5 + POSTGRESQL 9.6.6 + PSYCOPG2 ]}
+
+**END INSTALL**
+
+_______________________________________________________________________________________________________________________________________________
+**START FIRST APP****
+
+django-admin.py startproject mysite
+cd mysite
+python manage.py runserver
+# aquí ya podemos visitar el sitio web básico en http://127.0.0.1:8000/
+
+# Los siguientes comandos permiten visualizar el python path en donde el sistema buscará las funciones .py
+import sys
+print (sys.path)
+#output
+			['',
+			'/usr/lib/python35.zip',
+			'/usr/lib/python3.5',
+			'/usr/lib/python3.5/plat-x86_64-linux-gnu',
+			'/usr/lib/python3.5/lib-dynload',
+			'/home/gabriel/.local/lib/python3.5/site-packages',
+			'/usr/local/lib/python3.5/dist-packages',
+			'/usr/lib/python3/dist-packages'
+			]
+
+**END START FIRST APP****
+
+
+
+
+SETTINGS.PY
+ https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+AQUÍ SE PUEDEN ENCONTRAR LOS DIFERENTES VALORES DE ZONAS HORARIAS DE DJANGO.
+PARA QUE SEAN VALIDOS HAY QUE SETEAR LA VARIABLE: TIME_ZONE = 'America/Santiago'
+
+
+SITIO RESPONSIVE:
+	https://github.com/mlavin/django-responsive
+
+********************************************************************************************
+********************************************************************************************
+********************************************************************************************
+********************************************************************************************
+FORMULARIOS
+
+creamos en algún lugar del proyecto el archivo forms.py
+//yo lo hice dentro de la carpeta "vistas" junto a vistas.py
+entonces para probar como funciona:
+python manage.py shell
+from mysite.vistas.forms import FormularioContacto
+f = FormularioContacto()
+print(f)
+print (f.as_ul())
+print (f.as_p())
+//esto creará un string del formulario en diferentes formatos en html
+print (f['asunto'])
+print (f['mensaje'])
+//o mostrar campos específicos
+//continuamos en la página 141 del libro de django 2.0
+f = FormularioContacto({'asunto': 'Hola', 'mensaje': ''})
+printf(f.errors)
+
+
+********************************************************************************************
+********************************************************************************************
+********************************************************************************************
+IMAGENES
+models.ImageField()
+pip install Pillow
+********************************************************************************************
+********************************************************************************************
+********************************************************************************************
+
+
+ANEXOS:
+
+*BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD********
+los pasos que vienen a continuación son
+para conectar POSTGRESQL con un nuevo servidor en PGADMIN3
+actualmente en mi pc tengo postgresql 9.6.6
+
+usando la terminal:
+
+	sudo -u postgres psql postgres
+		aquí ingresamos a la BD con el usuario postgres... { INVESTIGAR }
+	\password postgres
+		aquí configuramos la contraseña para el usuario postgres => 1234
+..........................
+
+dentro de la terminal de postgres:
+\l => lista las bases de datos disponibles
+
+para trabajar en alguna BD
+\connect DBNAME
+
+para ver las relaciones de la tabla
+\dt
+
+para crear una tabla
+CREATE TABLE nombreDeLaTabla (id INTEGER PRIMARY KEY, name VARCHAR);
+
+para ver las relaciones de la tabla
+\dt
+
+
+
+CREATE DATABASE nombre_db WITH OWNER nombre_usuario;
+sudo -u postgres psql postgres
+CREATE DATABASE ing WITH OWNER postgres;
+
+
+
+tip: usar pgadmin3
+..........................
+https://chartio.com/resources/tutorials/how-to-list-databases-and-tables-in-postgresql-using-psql/
+http://evilnapsis.com/2016/09/05/3-modelos-de-base-de-datos-para-tabla-de-usuarios/
+..........................
+
+
+
+usando pgadmin3:
+	new server registration:
+		name: serverGooz
+		host: localhost
+		port: 5432
+		Maintenance DB: postgres
+		username: postgres
+		password: 1234
+		color: celeste
+		group: servers
+
+anexos: documentación de pgadmin3 https://www.pgadmin.org/docs/pgadmin3/1.22/index.html
+*BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD**BD********
+
+*INSTALAR VISUAL STUDIO CODE EN DEBIAN
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg && sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list' && sudo apt-get update && sudo apt install code code-insiders
+START ASS ROOT:
+sudo code --user-data-dir="~/.vscode-root"
+
+*RESPONSIVE CSS
+https://www.youtube.com/watch?v=M3qBpPw77qo
+*********************************************************************************
+COLORES CSS:
+http://clrs.cc/
+https://www.w3schools.com/colors/colors_picker.asp
+****************************************************************************
+para leer archivos excel
+sudo pip3 install xlrd
+https://www.blog.pythonlibrary.org/2014/04/30/reading-excel-spreadsheets-with-python-and-xlrd/
+
+///////////////////
+como iniciar y parar servicio postgres puerto 5432
+sudo service postgresql stop
+sudo service postgresql start
+///////////////////
+DOCKER COMPOSE
+para rebuild completo
+docker-compose up --force-recreate
+*recomiendo ver libro django con gunicorn
+http://ruddra.com/2016/11/02/serve-static-files-by-nginx-from-django-using-docker/
+http://ruddra.com/2016/08/14/docker-django-nginx-postgres/
+.....................
+CREAR UN COMANDO EN DJANGO:
+https://martinpeveri.wordpress.com/2015/07/01/crear-un-comando-en-django/
+ejecutar:
+python manage.py seedsuperuser --username test1 --password 123321 --noinput --email 'blank@email.com'
+***************
+LIMPIAR CACHE:
+sudo find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf

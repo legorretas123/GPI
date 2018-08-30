@@ -1,0 +1,255 @@
+/* core styles */
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: black;
+    color: #fff;
+    font-size: 1.1em;
+    line-height: 1.5;
+    text-align: center;
+    }
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 1em 0;
+}
+
+p {
+    margin: 0;
+    padding: 1em 0;
+}
+/*
+*******************************************************************
+*******************************************************************
+******************************************************************* */
+/* header header */
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow */
+.btn {
+/* esto transforma el elemento < a href= algo class= "btn">text</a> en un elegante boton*/
+    display: inline-block;
+    background: white;
+    color: rgb(46, 60, 106);
+    text-decoration: none;
+    padding: 0.5em 1em;
+    border: 1px solid #666666;
+    margin: .5em 0;
+}
+/* esto hace que cuando pase el cursor sobre el elemento < a href= algo class= "btn">text</a> entonces cambie de color*/
+.btn:hover{
+    background: rgb(46, 60, 106);
+    color: white;
+    opacity: 1;
+
+}
+
+
+#header {
+    min-height: 450px;
+
+}
+
+#header .bg-image{
+    position: absolute;
+    background: url(construccion.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 450px;
+    z-index: -1;
+    opacity: 0.73;
+}
+
+#header h1{
+    padding-top: 100px;
+    padding-bottom: 0;
+}
+
+#header .content-wrap{
+    padding: 4.6em 1.5em;
+}
+/*
+*******************************************************************
+*******************************************************************
+******************************************************************* */
+
+
+/* SECCION A: https://www.youtube.com/watch?v=M3qBpPw77qo */
+/* nav bar: https://www.youtube.com/watch?v=LOWjWRy_Kks*/
+
+#section-a {
+  background: #eaeaea;
+  color: #001a00;
+  padding-bottom: 2em;
+  /* border: 1px solid black; */
+}
+
+#section-a p{
+  float: left;
+  display: inline;
+  text-align: left;
+  margin-left: 20px;
+
+  /* border: 1px solid gold; */
+}
+
+
+#section-display {
+  background: rgb(46, 60, 106);
+  color: #001a00;
+  padding-bottom: 2em;
+}
+#section-display .contenido{
+  /* border: 1px solid gold; */
+}
+#section-display .contenido a{
+  float: left;
+  display: inline;
+  text-align: left;
+  margin-left: 0px;
+}
+#section-display .contenido p{
+
+  display: inline-block;
+  text-align: left;
+  color: white;
+  width: 400px;
+  margin-left: 0px;
+}
+
+
+
+
+
+/*
+*******************************************************************
+*******************************************************************
+******************************************************************* */
+#section-line {
+  background: #001a00;
+  color: #001a00;
+  padding-bottom: 2em;
+}
+/*
+*******************************************************************
+*******************************************************************
+******************************************************************* */
+
+#section-b {
+  padding: 2em 1em 1em;
+  background: #eaeaea;
+  overflow: hidden;
+}
+
+#section-b ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#section-b li {
+  margin-bottom: 1em;
+  color: #001a00;
+}
+.card{
+  width: 300px;
+  /* margin-left: auto;
+  margin-right: auto; */
+}
+
+.card-content {
+  padding: 1.5em;
+}
+
+/*
+*******************************************************************
+*******************************************************************
+******************************************************************* */
+
+#section-c {
+  background: #fff;
+  color: #001a00;
+  padding: 2em;
+}
+/*
+*******************************************************************
+*******************************************************************
+******************************************************************* */
+
+#section-d .box {
+  color: #fff;
+  padding: 2em;
+}
+#section-d .box:first-child {
+  background: #2690d4;
+}
+
+/*
+*******************************************************************
+*******************************************************************
+******************************************************************* */
+
+#section-form {
+  position: relative;
+  background: rgb(46, 60, 106);
+  padding: 2em;
+}
+#section-users {
+  position: relative;
+  background: rgb(46, 60, 106);
+  padding: 2em;
+}
+#section-users .content-users{
+  /* border: 1px solid black; */
+  height: 90px;
+}
+#section-users .content-users p{
+  float: left;
+  display: inline;
+  text-align: left;
+  width: 400px;
+  margin-left: 0px;
+  /* border: 1px solid black; */
+}
+#section-users .content-users a{
+  display: inline-block;
+
+  text-align: left;
+  margin-left: 0px;
+  /* border: 1px solid black; */
+}
+/*
+*******************************************************************
+*******************************************************************
+******************************************************************* */
+
+#main-footer{
+  position: relative;
+  padding: 2em;
+  background: #000;
+  color: #fff;
+  text-align: center;
+}
+
+#main-footer a{
+  color: #2690d4;
+  text-decoration: none;
+}
+#main-footer img{
+  display: block;
+  width: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+}
+
+/*
+*******************************************************************
+*******************************************************************
+**********************************************

@@ -1,0 +1,15 @@
+
+<section id="section-users" class="grid">
+
+  {% if perfiles %}
+      <ul>
+      {% for perfil in perfiles %}
+        <div class="content-users">
+          <p>{{perfil.user.first_name}} {{perfil.user.last_name}}, {{perfil.user.email}}, {{perfil.telefono}}, {{perfil.tipo}}, {{perfil.activo}}</p>
+          <a href="/Usuarios/Eliminar/{{perfil.user.username}}" class="btn">Eliminar</a>
+        </div>
+      {% endfor %}
+      {% else %}
+        <p>no hay usuarios</p>
+  {% endif %}
+</section>

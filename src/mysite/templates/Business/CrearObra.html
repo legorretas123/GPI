@@ -1,0 +1,104 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% include "Business/CSS/dashboard.html" %}
+{% include "Business/CSS/responsiveForm.html" %}
+</head>
+<body>
+
+<div class="sidenav">
+  <button class="dropdown-btn">Obras
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="/Obras/Crear">Crear Obras</a>
+    <a href="/Obras/Ver">Ver Obras</a>
+  </div>
+  <button class="dropdown-btn">Solicitudes
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="/Solicitudes/Crear">Crear Solicitudes</a>
+  </div>
+  <a href="/Logout">Logout</a>
+</div>
+
+<div class="main">
+  <p  ">Crear obra</p>
+  <div class="container">
+    <form action="" method="post" accept-charset="utf-8">{% csrf_token %}
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">nombre de la obra</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="nombre" value="" id="nombre">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">ubicación</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="ubicacion" value="" id="ubicacion">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">nombre del responsable</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="nombre_responsable" value="" id="nombre_responsable">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">email del responsable</label>
+        </div>
+        <div class="col-75">
+          <input type="text" name="email" value="" id="email">
+        </div>
+      </div>
+      <div class="row">
+        <input type="submit" value="Crear Obra" />
+      </div>
+      <div class="row">
+      <input type="hidden" name="next" value="/" />
+      </div>
+      {% if form.errors %}
+        <p style="color: red;">Lo sentimos, intentelo denuevo</p>
+        {{form.errors}}
+      {% endif %}
+    </form>
+  </div>
+
+
+
+</div>
+
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

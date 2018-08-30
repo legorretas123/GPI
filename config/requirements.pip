@@ -1,0 +1,5 @@
+Django==2.0.5
+gunicorn==19.6.0
+psycopg2==2.6
+Pillow
+xlrd==1.1

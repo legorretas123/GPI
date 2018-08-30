@@ -1,0 +1,17 @@
+<section id="section-display" class="grid">
+  <div class="content-wrap">
+    <h2 class="content-title"></h2>
+    <p>SOLICITUDES</p>
+
+    {% if solicitudes %}
+        <ul>
+        {% for solicitud in solicitudes %}
+          <p>{{solicitud.fecha}}; {{solicitud.bodeguero.nombre}}</p>
+          <a href="/VER" class="btn">Ver Solicitud</a>
+        {% endfor %}
+        {% else %}
+          <p>no hay solicitudes</p>
+    {% endif %}
+
+  </div>
+</section>

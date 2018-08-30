@@ -1,0 +1,13 @@
+<header id="header" class="grid">
+  <div class="bg-image"></div>
+    <div class="content-wrap">
+    <h1>Bienvenido</h1>
+
+    {% if user.is_authenticated %}
+      <p>{{user.username}}</p>
+      {% else %}
+      <p>SISTEMA GPI</p>
+    {% endif %}
+
+  </div>
+</header>
