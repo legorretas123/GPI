@@ -9,5 +9,5 @@ el usuario ingresa con nombreapellido & contraseña
 todos los emails son enviados de momento al email centralizado de gpi
 
 superusuario gpi:
-nombre de usuario:
-contraseña:
+nombre de usuario: gpi
+contraseña: gpi123456
